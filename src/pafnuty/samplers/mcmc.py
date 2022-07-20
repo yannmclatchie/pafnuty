@@ -1,16 +1,18 @@
 """Markov Chain Monte Carlo sampling module."""
+
 import numpy as np
 
-# from ...pafnuty.distributions import Normal
-# from ... import distributions
-from . import LFG
+from pafnuty.samplers.rng import LFG
 
 
 class HMC:
     """Hamiltonian MCMC class."""
 
     def __init__(
-        self, path_len=1, step_size=0.25, epochs=1_000,
+        self,
+        path_len=1,
+        step_size=0.25,
+        epochs=1_000,
     ):
         self.path_len = path_len
         self.step_size = step_size
@@ -22,7 +24,7 @@ class HMC:
         Code for this method is modified from Moore (2020), original accessible
         at https://gist.github.com/jdmoore7/ef28520f1c7663318c5f1174a2564bd1.
 
-        Arguments:
+        Args:
             dist (pafnuty.Dist): a natively-defined probability distribution
                 which we want to sample from.
             momentum (pafnuty.Dist): a natively-defined probability distribution
@@ -31,7 +33,8 @@ class HMC:
         Returns:
             ndarray: trace of MCMC sampling.
 
-        Exampels:
+        Example:
+
             >>> import pafnuty as paf
             >>> import pafnuty.samplers as samplers
             >>> # define probability distribution to sample from
@@ -42,7 +45,6 @@ class HMC:
             >>> mcmc = samplers.HMC()
             >>> # sample from the distribution
             >>> mcmc.sample(dist, momentum)
-
         """
 
         if dist.name is not "Normal" or momentum.name is not "Normal":

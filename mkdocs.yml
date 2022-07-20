@@ -14,7 +14,9 @@ theme:
         name: Switch to light mode
 
 nav:
-  - Introduction: 'index.md'
+  - Overview: 'index.md'
+  - Tutorials:
+    - Disc sampling: notebooks/01-ym-disc-sampling.ipynb
   - api_docs.md
   - changelog.md
 
@@ -25,11 +27,7 @@ markdown_extensions:
 plugins:
   - search:
   - mkdocstrings:
-      default_handler: python
       handlers:
         python:
-          rendering:
-            show_signature_annotations: true
-            show_source: true
-      watch:
-        - src/pafnuty
+          paths: [src]
+  - mknotebooks:

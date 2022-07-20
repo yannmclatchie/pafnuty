@@ -1,6 +1,4 @@
-"""Top-level package for pafnuty."""
+"""Top-level module for pafnuty."""
 
-__author__ = """Yann McLatchie"""
-__version__ = "0.1.0"
-
-from .distributions import Normal
+from pafnuty.distributions import Normal
+from pafnuty.samplers import *

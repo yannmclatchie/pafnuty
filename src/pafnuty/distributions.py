@@ -1,9 +1,9 @@
 """Probability distribution classes for sampling modules."""
+
 import jax
 import jax.numpy as jnp
 from jax import random
 from jax.scipy import special
-from .samplers import LFG
 
 
 class Dist:
@@ -42,7 +42,7 @@ class Normal(Dist):
     def pdf(self, x):
         """Return the probability distribution at a point x.
 
-        Arguments:
+        Args:
             x (float, int): the point at which to compute the PDF.
 
         Returns:
@@ -51,14 +51,14 @@ class Normal(Dist):
 
         """
 
-        return (jnp.exp(-1 * ((x - self.mu) ** 2) / (2 * self.sigma ** 2))) / (
+        return (jnp.exp(-1 * ((x - self.mu) ** 2) / (2 * self.sigma**2))) / (
             self.sigma * jnp.sqrt(2 * jnp.pi)
         )
 
     def logpdf(self, x):
         """Return the log probability distribution at a point x.
 
-        Arguments:
+        Args:
             x (float, int): the point at which to compute the log of the PDF.
 
         Returns:
@@ -72,7 +72,7 @@ class Normal(Dist):
     def cdf(self, x):
         """Return the cumulative probability distribution up to point x.
 
-        Arguments:
+        Args:
             x (float, int): the point up to which to compute the CDF.
 
         Returns:
@@ -86,7 +86,7 @@ class Normal(Dist):
     def invcdf(self, x):
         """Return the inverse cumulative probability distribution up to point x.
 
-        Arguments:
+        Args:
             x (float, int): the point up to which to compute the inverse CDF.
 
         Returns:
@@ -100,7 +100,7 @@ class Normal(Dist):
     def dVdQ(self, x):
         """Return gradient of PDF at a point x with JAX autodiff.
 
-        Arguments:
+        Args:
             x (float): the point at which to compute the gradient of the PDF.
 
         Returns:
@@ -121,21 +121,22 @@ class Normal(Dist):
         This method leverages the inverse cumulative distribution sampling
         technique to draw its samples using pafnuty's native Pseudo-RNGs.
 
-        Arguments:
+        Args:
             N (int): the number of samples to draw from the distribution.
 
         Returns:
             jax.DeviceArray: DeviceArray of N samples from distribution.
 
         To do:
-            Implement using native pseudo-RNGs, e.g.
-            >>> rng = samplers.LFG()
-            >>> u = rng.norm_sample(N=N)
-            >>> x = self.invcdf(u)
-            >>> return x
-            There is currently some error with this sampling method producing
-            incorrect samples.
+            * Implement using native pseudo-RNGs, e.g.
 
+                >>> rng = samplers.LFG()
+                >>> u = rng.norm_sample(N=N)
+                >>> x = self.invcdf(u)
+                >>> return x
+
+                There is currently some error with this sampling method producing
+                incorrect samples.
         """
 
         return random.normal(self.key, (N, 1)).flatten() * self.sigma + self.mu

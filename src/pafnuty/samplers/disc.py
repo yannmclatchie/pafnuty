@@ -1,6 +1,8 @@
 """Disc sampling module."""
+
 import numpy as np
-from .rng import LFG
+
+from pafnuty.samplers.rng import LFG
 
 
 class Disc:
@@ -11,7 +13,7 @@ class Disc:
         sampling strategies, and making use of the pseudorandom number generator
         classes also defined in this package.
 
-        Arguments:
+        Args:
             r (float): the radius of the disc to be sampled
             strategy (string): the sampling strategy to use
 
@@ -52,7 +54,7 @@ class Disc:
         the complete range of the consituent parts of the CDF uniformly, thus
         ensuring a uniform final distribution.
 
-        Arguments:
+        Args:
             N (int): the number of samples to return
 
         Returns:
@@ -75,7 +77,7 @@ class Disc:
     def _polar(self, N=1e6):
         """Perform disc sampling using polar coordinate sampling.
 
-        Arguments:
+        Args:
             N (int): the number of samples to return
 
         Returns:
@@ -96,7 +98,7 @@ class Disc:
     def _rejection(self, N=1e6):
         """Perform disc sampling using rejection sampling.
 
-        Arguments:
+        Args:
             N (int): the number of samples to return
 
         Returns:
@@ -122,7 +124,7 @@ class Disc:
     def sample(self, N=1e6):
         """The main sampling method of the Disc class.
 
-        Arguments:
+        Args:
             N (int, float): the number of samples to return
 
         Returns:

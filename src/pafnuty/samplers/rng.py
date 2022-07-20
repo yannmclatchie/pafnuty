@@ -3,7 +3,7 @@ import numpy as np
 
 
 class GGL:
-    def __init__(self, m=2 ** 31 - 1, a=16_807, c=0, seed=300416):
+    def __init__(self, m=2**31 - 1, a=16_807, c=0, seed=300416):
         """Initialise GGL settings, defaulting to MLGC settings."""
         self.m = m
         self.a = a
@@ -13,7 +13,7 @@ class GGL:
     def _ggl(self, x):
         """GGL random number generator.
 
-        Arguments:
+        Args:
             x (int): sample from previous RNG iteration
 
         Yields:
@@ -26,10 +26,10 @@ class GGL:
             x = (self.a * x + self.c) % self.m
             yield x
 
-    def sample(self, N=10 ** 6):
+    def sample(self, N=10**6):
         """Sample from GGL RNG.
 
-        Arguments:
+        Args:
             N (int): number of samples to return
 
         Returns:
@@ -49,10 +49,10 @@ class GGL:
         # return samples from the MLGC RNG
         return np.array([next(lcg) for i in range(N)])
 
-    def norm_sample(self, lower=0, upper=1, N=10 ** 6):
+    def norm_sample(self, lower=0, upper=1, N=10**6):
         """Normalised samples from GGL RNG.
 
-        Arguments:
+        Args:
             lower (float): the lower bound of uniform samples
             upper (float): the upper bound of uniform samples
             N (int): number of samples to return
@@ -82,8 +82,8 @@ class GGL:
 
 
 class LFG:
-    def __init__(self, seeds=None, m=2 ** 32, a=24, b=55):
-        """"Initialise LFG RNG class with RAN3 settings."""
+    def __init__(self, seeds=None, m=2**32, a=24, b=55):
+        """ "Initialise LFG RNG class with RAN3 settings."""
 
         self.m = m
         self.a = a
@@ -115,10 +115,10 @@ class LFG:
             )
             yield self.seeds[-1]
 
-    def sample(self, N=10 ** 6):
+    def sample(self, N=10**6):
         """Samples from LFG RNG.
 
-        Arguments:
+        Args:
             N (int): number of samples to return
 
         Returns:
@@ -136,10 +136,10 @@ class LFG:
         rng = self._lfg()
         return np.array([next(rng) for i in range(N)])
 
-    def norm_sample(self, lower=0, upper=1, N=10 ** 6):
+    def norm_sample(self, lower=0, upper=1, N=10**6):
         """Normalised samples from LFG RNG.
 
-        Arguments:
+        Args:
             lower (float): the lower bound of uniform samples
             upper (float): the upper bound of uniform samples
             N (int): number of samples to return
